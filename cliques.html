@@ -21,9 +21,18 @@
         var contador = document.getElementById("contador");
         var quantidadeDeCliques = 0;
 
+        window.onload = function () {
+            var storedCount = localStorage.getItem("qtd");
+            if (storedCount) {
+                quantidadeDeCliques = parseInt(storedCount);
+                contador.textContent = quantidadeDeCliques;
+            }
+        }
+
         function aumentar() {
             quantidadeDeCliques = quantidadeDeCliques + 1;
             contador.textContent = quantidadeDeCliques;
+            localStorage.setItem("qtd", quantidadeDeCliques);
         }
 
         function diminuir() {
@@ -33,11 +42,13 @@
             } else {
                 contador.innerText = "Digite algo para começar";
             }
+            localStorage.setItem("qtd", quantidadeDeCliques);
         }
 
         function resetar() {
             quantidadeDeCliques = 0;
             contador.innerText = "Clique para começar";
+            localStorage.setItem("qtd", quantidadeDeCliques);
         }
 
         document.addEventListener("keydown", function (event) {
